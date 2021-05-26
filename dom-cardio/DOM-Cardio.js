@@ -66,7 +66,13 @@ divTwo.childNodes[0].remove();
 //   <p>They are HEIGHT and AGE years old. In Dog years this person would be AGEINDOGYEARS. That would be a tall dog!</p>
 // </div>
 function generatePlayerCard(name, age, height) {
-	return `<div class="playerCard"><h2>${name} — ${age}</h2><p>They are ${height} and ${age} years old. In Dog years this person would be ${age*7}. That would be a tall dog!</p></div>`
+	return `
+		<div class="playerCard">
+			<h2>${name} — ${age}</h2>
+			<p>They are ${height} and ${age} years old. In Dog years this person would be ${age*7}. That would be a tall dog!</p>
+			<button class="delete" type="button">&times; Delete</button>
+		</div>
+	`
 };
 
 
@@ -90,3 +96,15 @@ document.querySelector('body').insertAdjacentElement('afterbegin', card);
 // select all the buttons!
 // make out delete function
 // loop over them and attach a listener
+
+const buttons = document.querySelectorAll('.delete');
+
+function deleteCard(event) {
+	const buttonClicked = event.currentTarget;
+	// buttonClicked.parentElement.remove();
+	buttonClicked.closest('.playerCard').remove();
+	console.log(event.currentTarget);
+};
+
+buttons.forEach(button => button.addEventListener('click', deleteCard));
+ 
